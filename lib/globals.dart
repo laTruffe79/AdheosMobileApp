@@ -1,0 +1,1 @@
+const String appName = 'Adhéos Rainbow';

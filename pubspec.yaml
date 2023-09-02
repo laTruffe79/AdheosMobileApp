@@ -38,6 +38,7 @@ dependencies:
   url_launcher: ^6.1.12
   font_awesome_flutter: ^10.5.0
   share_plus: ^7.1.0
+  page_transition: ^2.0.9
 
   flutter:
     sdk: flutter

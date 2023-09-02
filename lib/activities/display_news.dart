@@ -6,10 +6,10 @@ import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:share_plus/share_plus.dart';
 import 'package:adheos/ui/my_app_bar.dart';
 import 'package:flutter/foundation.dart';
+import 'package:page_transition/page_transition.dart';
 
 class DisplayNews extends StatefulWidget {
 
@@ -118,21 +118,6 @@ class _DisplayNewsState extends State<DisplayNews> {
     //final String text = 'Texte en provenance d\'Adhéos';
     final Uri uriShare = Uri.parse(urlShare);
 
-    /*final urls = {
-      SocialMedia.facebook : 'https://www.facebook.com/sharer/sharer.php?u=$urlShare&t=$subject',
-      SocialMedia.X : 'https://twitter.com/intent/tweet?url=$urlShare&text=$subject',
-      SocialMedia.whatsapp : 'https://api.whatsapp.com/send?text=$urlShare',
-      SocialMedia.linkedin : 'https://www.linkedin.com/sharing/share-offsite/?url=$urlShare&title=$subject',
-    };
-
-    final url = Uri.parse(urls[socialmedia]!);
-
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url,mode: LaunchMode.externalApplication);
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Application not installed")));
-    }*/
 
     try {
       await Share.shareUri(uriShare);
@@ -158,8 +143,9 @@ class _DisplayNewsState extends State<DisplayNews> {
 
     this.isAndroid ? safeAreaSize += 25 : safeAreaSize += 65;
 
+
     return Scaffold(
-        extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color.fromRGBO(36, 6, 64, 1),
       appBar: myAppBar,
       body: Container(

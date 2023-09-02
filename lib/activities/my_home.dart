@@ -10,6 +10,8 @@ import 'display_news.dart';
 import 'package:adheos/models/Article.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:flutter/services.dart';
+import 'package:adheos/ui/menu.dart' as MyNavigationDrawer;
+import 'package:page_transition/page_transition.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
@@ -74,13 +76,11 @@ class _MyHomeState extends State<MyHome> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         backgroundColor: const Color.fromRGBO(27, 33, 78, 1.0),
+        drawer: MyNavigationDrawer.NavigationDrawer(),
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
           forceMaterialTransparency: true,
-          leading: const SizedBox.shrink(),
-          // Remove the back arrow icon
           centerTitle: true,
-          //backgroundColor: Theme.of(context).colorScheme.primary,
-          //backgroundColor: Theme.of(context).colorScheme.primary,
           title: const Text(
             "News Adhéos",
             style: TextStyle(
@@ -153,14 +153,23 @@ class _MyHomeState extends State<MyHome> {
     //print("article : $article.toString()");
     return GestureDetector(
       onTap: () {
+        //Navigator.pop(context);
         Navigator.push(
           context,
-          MaterialPageRoute(
+          /*MaterialPageRoute(
             builder: (context) => DisplayNews(
               key: Key("news $index.toString()"),
               article: article,
             ),
-          ),
+          ),*/
+          PageTransition(
+              child: DisplayNews(
+                key: Key("news $index.toString()"),
+                article: article,
+              ),
+              type: PageTransitionType.rightToLeft,
+              isIos: true,
+          )
         );
       },
       child: Column(

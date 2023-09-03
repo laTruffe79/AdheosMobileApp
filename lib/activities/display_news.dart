@@ -115,7 +115,6 @@ class _DisplayNewsState extends State<DisplayNews> {
 
   Future share(String subject, String urlShare) async{
     subject = Uri.encodeComponent(subject);
-    //final String text = 'Texte en provenance d\'Adhéos';
     final Uri uriShare = Uri.parse(urlShare);
 
 

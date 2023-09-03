@@ -41,6 +41,7 @@ class _MyHomeState extends State<MyHome> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    //Navigator.popUntil(context, ModalRoute.withName("/myHome"));
   }
 
   @override
@@ -73,47 +74,51 @@ class _MyHomeState extends State<MyHome> {
         )
     );
 
-    return Scaffold(
-        extendBodyBehindAppBar: true,
-        backgroundColor: const Color.fromRGBO(27, 33, 78, 1.0),
-        drawer: MyNavigationDrawer.NavigationDrawer(),
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
-          forceMaterialTransparency: true,
-          centerTitle: true,
-          title: const Text(
-            "News Adhéos",
-            style: TextStyle(
-              color: Color.fromRGBO(255, 255, 255, 1),
+    return WillPopScope(
+      onWillPop: () async {
+        return true;
+      },
+      child: Scaffold(
+          extendBodyBehindAppBar: true,
+          backgroundColor: const Color.fromRGBO(27, 33, 78, 1.0),
+          drawer: MyNavigationDrawer.NavigationDrawer(),
+          appBar: AppBar(
+            iconTheme: IconThemeData(color: Colors.white),
+            forceMaterialTransparency: true,
+            centerTitle: true,
+            title: const Text(
+              "News Adhéos",
+              style: TextStyle(
+                color: Color.fromRGBO(255, 255, 255, 1),
+              ),
             ),
           ),
-        ),
-        body: Container(
-          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-              colors: [
-                Color.fromRGBO(36, 6, 64, 1),
-                Color.fromRGBO(102, 34, 161, 1)
-              ],
+          body: Container(
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+                  Color.fromRGBO(36, 6, 64, 1),
+                  Color.fromRGBO(102, 34, 161, 1)
+                ],
+              ),
             ),
-          ),
-          child: LiquidPullToRefresh(
-            onRefresh: _handleRefresh,
-            animSpeedFactor: 3,
-            color: Theme.of(context).colorScheme.primary,
-            backgroundColor: Colors.purple.shade100,
-            height: 200,
-            showChildOpacityTransition: true,
-            child: FutureBuilder(
-                future: fetchAndPrintRss(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  return snapshot.connectionState == ConnectionState.waiting
-                      ? Center(
-                          child: Container(
+            child: LiquidPullToRefresh(
+              onRefresh: _handleRefresh,
+              animSpeedFactor: 3,
+              color: Theme.of(context).colorScheme.primary,
+              backgroundColor: Colors.purple.shade100,
+              height: 200,
+              showChildOpacityTransition: true,
+              child: FutureBuilder(
+                  future: fetchAndPrintRss(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    return snapshot.connectionState == ConnectionState.waiting
+                        ? Center(
+                        child: Container(
                           height: 200,
                           width: 200,
                           child: const CircularProgressIndicator(
@@ -121,21 +126,22 @@ class _MyHomeState extends State<MyHome> {
                             strokeWidth: 10,
                           ),
                         ))
-                      : SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: items.length,
-                                  itemBuilder: itemBuilder),
-                            ],
-                          ),
-                        );
-                }),
-          ),
-        ));
+                        : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              itemCount: items.length,
+                              itemBuilder: itemBuilder),
+                        ],
+                      ),
+                    );
+                  }),
+            ),
+          ))
+    );
   }
 
   Widget itemBuilder(BuildContext context, int index) {
@@ -153,7 +159,7 @@ class _MyHomeState extends State<MyHome> {
     //print("article : $article.toString()");
     return GestureDetector(
       onTap: () {
-        //Navigator.pop(context);
+
         Navigator.push(
           context,
           /*MaterialPageRoute(
@@ -168,6 +174,7 @@ class _MyHomeState extends State<MyHome> {
                 article: article,
               ),
               type: PageTransitionType.rightToLeft,
+              duration: const Duration(milliseconds: 600) ,
               isIos: true,
           )
         );

@@ -49,7 +49,7 @@ class NavigationDrawer extends StatelessWidget {
           onTap: () {
             // close navigation drawer
             //Navigator.pop(context);
-            Navigator.popUntil(context, ModalRoute.withName('/myHome'));
+            Navigator.pop(context);
             launchUrl(Uri.parse("https://www.adheos.org"));
           }
         ),ListTile(

@@ -24,7 +24,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: Icon(icon, color: Colors.white),
         onPressed: () {
-          Navigator.popAndPushNamed(context, routeName);
+          Navigator.popUntil(context, ModalRoute.withName(routeName));
         },
       ),
       backgroundColor: color,

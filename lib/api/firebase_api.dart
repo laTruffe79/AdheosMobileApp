@@ -48,15 +48,18 @@ class FirebaseApi {
       Map<String,dynamic> data = message.data;
 
       if (data.containsKey('type') && data['type'] == 'screen') {
+
         if (data.containsKey('route') && data['route'] != '') {
 
-          navigatorState.currentState?.pushNamed(data['route']);
+          navigatorState.currentState?.pushReplacementNamed(data['route']);
 
         }
+
       }else if(data.containsKey('type') && data['type'] == 'url'){
 
         if (data.containsKey('route') && data['route'] != '') {
 
+          navigatorState.currentState?.pushReplacementNamed('/myHome');
           String routeValue = data['route'];
           launchUrl(Uri.parse("https://www.adheos.org/$routeValue"));
           //https://www.adheos.org/don
@@ -64,7 +67,7 @@ class FirebaseApi {
 
       }else{
 
-        navigatorState.currentState?.pushNamed('/myHome');
+        navigatorState.currentState?.pushReplacementNamed('/myHome');
 
       }
 

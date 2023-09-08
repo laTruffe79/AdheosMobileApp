@@ -6,12 +6,30 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'ui/style/text_styles.dart';
+// firebase imports
+import 'package:firebase_core/firebase_core.dart';
+import 'package:adheos/firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:adheos/api/firebase_api.dart';
 
-void main() {
+final navigatorState = GlobalKey<NavigatorState>();
+
+Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await FirebaseApi().initNotifications();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(const MyApp()));
+
+  /*final token = await FirebaseMessaging.instance.getToken();
+  print("token  : $token \n\n");*/
+
+
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? cle}) : super(key: cle);
@@ -35,6 +53,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       //initialRoute: '/',
+      navigatorKey: navigatorState,
       routes: {
         //'/': (context) => const MyHomePage(title: appName),
         '/myHome': (context) => const MyHome(),
@@ -58,9 +77,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late Future googleFontsPending;
 
+
   @override
-  void initState() {
+  void initState(){
     super.initState();
+
 
     googleFontsPending = GoogleFonts.pendingFonts([
       GoogleFonts.poppins(),
@@ -70,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     final homeTextStyle = GoogleFonts.montserrat(
       fontSize: 24,
       color: Colors.purple.shade200,

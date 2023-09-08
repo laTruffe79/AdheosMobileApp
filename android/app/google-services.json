@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "410307052915",
+    "project_id": "adheos-app",
+    "storage_bucket": "adheos-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410307052915:android:ff3f4d292b4dad98563106",
+        "android_client_info": {
+          "package_name": "com.example.adheos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410307052915-opbp3j7q1oc2dolf3cu4ot68i35qm6rs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXvKjlVq4ayPk8Jur176gkTpku8HyLKZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410307052915-opbp3j7q1oc2dolf3cu4ot68i35qm6rs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

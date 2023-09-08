@@ -1,7 +1,7 @@
 import 'package:adheos/globals.dart';
 import 'package:flutter/material.dart';
 
-//import 'dart:developer';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:xml2json/xml2json.dart';
 import 'dart:convert';
@@ -29,10 +29,21 @@ class _MyHomeState extends State<MyHome> {
 
   Future<String> getRss() async {
     final Uri url = Uri.parse(rssUri);
-    final http.Response response = await http.get(url);
+    String jsonData = "";
 
-    xml2json.parse(response.body.toString());
-    String jsonData = xml2json.toGData();
+    try{
+      final http.Response response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        xml2json.parse(response.body.toString());
+        jsonData = xml2json.toGData();
+      }
+
+    } on SocketException catch(_){
+      SnackBar(
+          content: Text("Oops ! Pas de connexion internet ?..."),
+      );
+    }
 
     return jsonData;
   }

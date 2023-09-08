@@ -10,11 +10,11 @@ import 'package:share_plus/share_plus.dart';
 import 'package:adheos/ui/my_app_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:page_transition/page_transition.dart';
+import 'dart:io';
 
 class DisplayNews extends StatefulWidget {
 
   final Article article;
-  //var content;
 
   DisplayNews({
     Key? key,
@@ -32,8 +32,6 @@ class _DisplayNewsState extends State<DisplayNews> {
   List<dynamic> content = [];
   Article article;
   String description = "";
-  bool isAndroid = defaultTargetPlatform == TargetPlatform.android;
-  bool isIos = defaultTargetPlatform == TargetPlatform.iOS;
   double safeAreaSize = 0;
 
   _DisplayNewsState(this.article);
@@ -41,13 +39,7 @@ class _DisplayNewsState extends State<DisplayNews> {
   @override
   void initState() {
     super.initState();
-    if (defaultTargetPlatform == TargetPlatform.android){
-      isAndroid = true;
-      this.isIos = false;
-    }else{
-      this.isAndroid = false;
-      this.isIos = true;
-    }
+
   }
 
   @override
@@ -60,7 +52,6 @@ class _DisplayNewsState extends State<DisplayNews> {
     final response = await http.get(Uri.parse(url));
 
     const String selector = 'div.entry-content > p';
-    //String parsedText = "";
 
     dom.Document html = dom.Document.html(response.body);
 
@@ -72,10 +63,8 @@ class _DisplayNewsState extends State<DisplayNews> {
 
       String addedText = parseFragment(element).text ?? "";
       description += "$addedText\n\n" ;
-      //print(element);
-    }
 
-    //print(description);
+    }
 
   }
 
@@ -131,16 +120,16 @@ class _DisplayNewsState extends State<DisplayNews> {
   Widget build(BuildContext context) {
 
     MyAppBar myAppBar = MyAppBar(
-        context: context,
         title: "",
         icon: Icons.arrow_back,
         color: Theme.of(context).colorScheme.primary,
         routeName: "/myHome"
     );
 
+    // get status bar height
     safeAreaSize = myAppBar.preferredSize.height;
-
-    this.isAndroid ? safeAreaSize += 25 : safeAreaSize += 65;
+    // add margin depending on platform
+    Platform.isAndroid ? safeAreaSize += 25 : safeAreaSize += 65;
 
 
     return Scaffold(

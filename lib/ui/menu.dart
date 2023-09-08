@@ -53,6 +53,25 @@ class NavigationDrawer extends StatelessWidget {
             launchUrl(Uri.parse("https://www.adheos.org"));
           }
         ),ListTile(
+            leading: const Icon(Icons.question_answer_outlined,color: Colors.white,),
+            title: const Text('Qui sommes-nous ?',style: TextStyle(color: Colors.white),),
+            onTap: () {
+              // close navigation drawer
+              //Navigator.pop(context);
+              Navigator.pop(context);
+              launchUrl(Uri.parse("https://www.adheos.org/presentation"));
+            }
+        ),ListTile(
+            leading: const Icon(Icons.euro,color: Colors.white,),
+            title: const Text('Faire un don',style: TextStyle(color: Colors.white),),
+            onTap: () {
+              // close navigation drawer
+              //Navigator.pop(context);
+              Navigator.pop(context);
+              launchUrl(Uri.parse("https://www.adheos.org/don"));
+            }
+        )
+        ,ListTile(
           leading: const Icon(Icons.calendar_month,color: Colors.white,),
           title: const Text('Agenda/Évènements',style: TextStyle(color: Colors.white),),
           onTap: () {
@@ -70,15 +89,6 @@ class NavigationDrawer extends StatelessWidget {
             //Navigator.pop(context);
             Navigator.pop(context);
             launchUrl(Uri.parse("https://discord.gg/avNCXrGYp8"));
-          }
-        ),ListTile(
-          leading: const Icon(Icons.question_answer_outlined,color: Colors.white,),
-          title: const Text('Qui sommes-nous ?',style: TextStyle(color: Colors.white),),
-          onTap: () {
-            // close navigation drawer
-            //Navigator.pop(context);
-            Navigator.pop(context);
-            launchUrl(Uri.parse("https://www.adheos.org/presentation"));
           }
         ),
         ListTile(

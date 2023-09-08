@@ -6,11 +6,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData icon;
   final Color color;
   final String routeName;
-  final BuildContext context;
 
   const MyAppBar({
     Key? key,
-    required this.context,
     required this.title,
     required this.icon,
     required this.color,

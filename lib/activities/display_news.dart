@@ -137,7 +137,7 @@ class _DisplayNewsState extends State<DisplayNews> {
       backgroundColor: const Color.fromRGBO(36, 6, 64, 1),
       appBar: myAppBar,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.bottomLeft,
             end: Alignment.topRight,
@@ -147,14 +147,12 @@ class _DisplayNewsState extends State<DisplayNews> {
         child: FutureBuilder(future: getWebsiteData(article.url),builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot ){
           return snapshot.connectionState == ConnectionState.waiting ?
           Center(
-              child: Container(
-                height: 200,
-                width: 200,
+              child: Expanded(
                 child: const CircularProgressIndicator(
                   color: Colors.purple,
                   strokeWidth: 10,
                 ),
-              )
+              ),
           )
               : SingleChildScrollView(
             child: Padding(
@@ -163,7 +161,7 @@ class _DisplayNewsState extends State<DisplayNews> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    article.title,
+                    article.datePub+':\n'+article.title,
                     style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22,

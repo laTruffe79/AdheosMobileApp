@@ -2,12 +2,13 @@
 class Article{
 
   String _title;
+  String _datePub;
   String _imageUrl;
   String _description;
   String _url;
 
 
-  Article(this._title, this._imageUrl, this._description, this._url);
+  Article(this._title, this._imageUrl, this._description, this._url,this._datePub);
 
   String get description => _description;
 
@@ -31,6 +32,12 @@ class Article{
 
   set url(String value) {
     _url = value;
+  }
+
+  String get datePub => _datePub;
+
+  set datePub(String value) {
+    _datePub = value;
   }
 
   @override

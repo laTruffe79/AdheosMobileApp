@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBXvKjlVq4ayPk8Jur176gkTpku8HyLKZw',
-    appId: '1:410307052915:android:ff3f4d292b4dad98563106',
-    messagingSenderId: '410307052915',
-    projectId: 'adheos-app',
-    storageBucket: 'adheos-app.appspot.com',
+    apiKey: 'AIzaSyDH8njdcfMTToTU0vhgYaQv9QOpKT22kdk',
+    appId: '1:451850312446:android:dd2d8b00833abe2e3763af',
+    messagingSenderId: '451850312446',
+    projectId: 'adheos-app-525ee',
+    storageBucket: 'adheos-app-525ee.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBlN0dYaTr3DBQ26GIaGqoGEppPbOJN_7Q',
-    appId: '1:410307052915:ios:12999c615df9232a563106',
-    messagingSenderId: '410307052915',
-    projectId: 'adheos-app',
-    storageBucket: 'adheos-app.appspot.com',
-    iosClientId: '410307052915-fh8gtpk680aapnikhs1uiole9460p8dp.apps.googleusercontent.com',
-    iosBundleId: 'com.example.adheos',
+    apiKey: 'AIzaSyDcn-8mul5WFvoQPAjH6qOJfF0bRR4WFlU',
+    appId: '1:451850312446:ios:9a32d0eb45811e293763af',
+    messagingSenderId: '451850312446',
+    projectId: 'adheos-app-525ee',
+    storageBucket: 'adheos-app-525ee.appspot.com',
+    iosBundleId: 'com.adheos.app',
   );
 }

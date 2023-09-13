@@ -9,7 +9,7 @@ import 'ui/style/text_styles.dart';
 // firebase imports
 import 'package:firebase_core/firebase_core.dart';
 import 'package:adheos/firebase_options.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+//import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:adheos/api/firebase_api.dart';
 
 final navigatorState = GlobalKey<NavigatorState>();
@@ -23,9 +23,6 @@ Future<void> main() async {
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(const MyApp()));
-
-  /*final token = await FirebaseMessaging.instance.getToken();
-  print("token  : $token \n\n");*/
 
 
 }
@@ -139,14 +136,16 @@ class _MyHomePageState extends State<MyHomePage> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(54, 16, 54, 0),
-                    child: SvgPicture.asset(
-                      'assets/svg/undraw_pride.svg',
-                      width: 350,
-                    ),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                        padding: const EdgeInsets.fromLTRB(54, 16, 54, 0),
+                        child: SvgPicture.asset(
+                          'assets/svg/undraw_pride.svg',
+                          width: 300,
+                        ),
+                      ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.fromLTRB(54, 16, 54, 0),
                     child: Text(
@@ -198,21 +197,24 @@ class _MyHomePageState extends State<MyHomePage> {
                           )
                       ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(48, 36, 48, 20),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: InkWell(
-                            child: Text(
-                              "Qui sommes-nous ?",
-                              style: links,
-                            ), //Qui sommes-nous?
-                            onTap: () => launchUrl(Uri.parse("https://www.adheos.org/presentation")),
-                          ),
-                        ),
-                        Padding(
+                  Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(48, 20, 48, 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: InkWell(
+                                child: Text(
+                                  "Qui sommes-nous ?",
+                                  style: links,
+                                ), //Qui sommes-nous?
+                                onTap: () => launchUrl(Uri.parse("https://www.adheos.org/presentation")),
+                              ),
+                            ),
+                            /*Padding(
                           padding: const EdgeInsets.all(6),
                           child: InkWell(
                             onTap: () => launchUrl(Uri.parse("https://www.adheos.org/contact")),
@@ -221,19 +223,20 @@ class _MyHomePageState extends State<MyHomePage> {
                               style: links,
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: InkWell(
-                            onTap: () => launchUrl(Uri.parse("https://www.adheos.org/mentions-legales")),
-                            child: Text(
-                              "Mentions légales",
-                              style: links,
+                        ),*/
+                            Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: InkWell(
+                                onTap: () => launchUrl(Uri.parse("https://www.adheos.org/mentions-legales")),
+                                child: Text(
+                                  "Mentions légales",
+                                  style: links,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
                   ),
                 ],
               );

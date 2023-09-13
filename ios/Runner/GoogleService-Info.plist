@@ -2,22 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>410307052915-fh8gtpk680aapnikhs1uiole9460p8dp.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.410307052915-fh8gtpk680aapnikhs1uiole9460p8dp</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBlN0dYaTr3DBQ26GIaGqoGEppPbOJN_7Q</string>
+	<string>AIzaSyDcn-8mul5WFvoQPAjH6qOJfF0bRR4WFlU</string>
 	<key>GCM_SENDER_ID</key>
-	<string>410307052915</string>
+	<string>451850312446</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.adheos</string>
+	<string>com.adheos.app</string>
 	<key>PROJECT_ID</key>
-	<string>adheos-app</string>
+	<string>adheos-app-525ee</string>
 	<key>STORAGE_BUCKET</key>
-	<string>adheos-app.appspot.com</string>
+	<string>adheos-app-525ee.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:410307052915:ios:12999c615df9232a563106</string>
+	<string>1:451850312446:ios:9a32d0eb45811e293763af</string>
 </dict>
 </plist>

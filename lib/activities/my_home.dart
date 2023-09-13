@@ -23,7 +23,7 @@ class MyHome extends StatefulWidget {
 class _MyHomeState extends State<MyHome> {
   //String rssUri = "https://developer.apple.com/news/releases/rss/releases.rss";
   String firstTitle = "";
-  final Xml2Json xml2json = Xml2Json();
+  Xml2Json xml2json = Xml2Json();
   List items = [];
   Global global = Global.instance;
 
@@ -35,6 +35,7 @@ class _MyHomeState extends State<MyHome> {
       final http.Response response = await http.get(url);
 
       if (response.statusCode == 200) {
+        String? responseBody = response.body.toString();
         xml2json.parse(response.body.toString());
         jsonData = xml2json.toGData();
       }
@@ -52,7 +53,6 @@ class _MyHomeState extends State<MyHome> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //Navigator.popUntil(context, ModalRoute.withName("/myHome"));
   }
 
   @override
@@ -158,27 +158,24 @@ class _MyHomeState extends State<MyHome> {
   Widget itemBuilder(BuildContext context, int index) {
     var item = items[index];
 
-    String title =
-        parseFragment(json.encode(item['title']['\$t'])).text ?? "pas de titre";
-    String description =
-        parseFragment(json.encode(item['description']['__cdata'])).text ??
-            "pas de description";
-    String imageUrl = item['imageUrl']['\$t'].toString();
-    String link = item['link']['\$t'].toString();
+    String title = parseFragment(json.encode(item['title']['\$t'])).text ?? "pas de titre";
+    String description = parseFragment(json.encode(item['description']['__cdata'])).text ??  "pas de description";
 
-    Article article = Article(title, imageUrl, description, link);
+    String imageUrl = item['image']['url']['\$t'].toString();
+    String link = item['link']['\$t'].toString();
+    // @todo add try catch FormatException
+
+    var dateNode = item['pubDate']['\$t'].toString();
+    DateTime dt = DateTime.parse(dateNode);
+    String datePub = dt.day.toString()+'-'+dt.month.toString()+'-'+dt.year.toString();
+
+    Article article = Article(title, imageUrl, description, link, datePub);
     //print("article : $article.toString()");
     return GestureDetector(
       onTap: () {
 
         Navigator.push(
           context,
-          /*MaterialPageRoute(
-            builder: (context) => DisplayNews(
-              key: Key("news $index.toString()"),
-              article: article,
-            ),
-          ),*/
           PageTransition(
               child: DisplayNews(
                 key: Key("news $index.toString()"),
@@ -222,7 +219,7 @@ class _MyHomeState extends State<MyHome> {
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          title,
+                          datePub+': '+title,
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,

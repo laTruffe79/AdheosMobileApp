@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "410307052915",
-    "project_id": "adheos-app",
-    "storage_bucket": "adheos-app.appspot.com"
+    "project_number": "451850312446",
+    "project_id": "adheos-app-525ee",
+    "storage_bucket": "adheos-app-525ee.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:410307052915:android:ff3f4d292b4dad98563106",
+        "mobilesdk_app_id": "1:451850312446:android:dd2d8b00833abe2e3763af",
         "android_client_info": {
-          "package_name": "com.example.adheos"
+          "package_name": "com.adheos.app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "410307052915-opbp3j7q1oc2dolf3cu4ot68i35qm6rs.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBXvKjlVq4ayPk8Jur176gkTpku8HyLKZw"
+          "current_key": "AIzaSyDH8njdcfMTToTU0vhgYaQv9QOpKT22kdk"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "410307052915-opbp3j7q1oc2dolf3cu4ot68i35qm6rs.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

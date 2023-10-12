@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'activities/my_home.dart';
 import 'globals.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'ui/style/text_styles.dart';
+//import 'package:url_launcher/url_launcher.dart';
+//import 'ui/style/text_styles.dart';
 // firebase imports
 import 'package:firebase_core/firebase_core.dart';
 import 'package:adheos/firebase_options.dart';
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:adheos/api/firebase_api.dart';
+import 'dart:async';
 
 final navigatorState = GlobalKey<NavigatorState>();
 
@@ -26,7 +27,6 @@ Future<void> main() async {
 
 
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? cle}) : super(key: cle);
@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
       routes: {
         //'/': (context) => const MyHomePage(title: appName),
         '/myHome': (context) => const MyHome(),
+        '/events': (context) => const MyHome(key: ValueKey('events'), displayNewsList: false)
 
       },
 
@@ -74,30 +75,40 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late Future googleFontsPending;
 
-
   @override
   void initState(){
     super.initState();
-
 
     googleFontsPending = GoogleFonts.pendingFonts([
       GoogleFonts.poppins(),
       GoogleFonts.montserrat(fontStyle: FontStyle.italic),
     ]);
+
+    startTimer();
+  }
+
+  startTimer(){
+    Duration duration = const Duration(seconds: 7);
+    return Timer(duration, () {
+      Navigator.popAndPushNamed(context, "/events");
+    });
+
   }
 
   @override
   Widget build(BuildContext context) {
 
     final homeTextStyle = GoogleFonts.montserrat(
-      fontSize: 24,
-      color: Colors.purple.shade200,
+      fontSize: 22,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
       textStyle: Theme.of(context).textTheme.displayLarge,
     );
 
     final homeTextStyle2 = GoogleFonts.montserrat(
-      fontSize: 20,
-      color: Colors.purple.shade200,
+      fontSize: 17,
+      height: 1.4,
+      color: Colors.white,
       textStyle: Theme.of(context).textTheme.displayMedium,
     );
 
@@ -137,107 +148,42 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    flex: 2,
                     child: Padding(
-                        padding: const EdgeInsets.fromLTRB(54, 16, 54, 0),
-                        child: SvgPicture.asset(
-                          'assets/svg/undraw_pride.svg',
-                          width: 300,
+                        padding: const EdgeInsets.fromLTRB(46, 70, 46, 0),
+                        child: Image.asset(
+                          'assets/Logo.gif',
+                          width: 420,
+                          height: 420,
+                          fit: BoxFit.fill,
+                          repeat: ImageRepeat.noRepeat,
                         ),
-                      ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(54, 16, 54, 0),
-                    child: Text(
-                      "BIENVENUE sur l'app ADHEOS Rainbow!",
-                      style: homeTextStyle,
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  const SizedBox(height: 10, width: 0),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(54, 0, 54, 20),
-                    child: Text(
-                      "Adhéos est une association LGBTI militante et conviviale accueille "
-                      "informe et défend les droits des personnes LGBTI en France et dans le monde.",
-                      style: homeTextStyle2,
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(54, 0, 54, 0),
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.popAndPushNamed(context, "/myHome");
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.purple[500],
-                            maximumSize: const Size(double.infinity, 80),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              side: const BorderSide(
-                                color: Colors.purple,
-                                width: 2,
-                              ),
-                            ),
-                            //minimumSize: const Size(32, 32),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 0),
-                            elevation: 8, // set the elevation to 8
-                            shadowColor: const Color.fromRGBO(162, 86, 255, 1),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              appName,
-                              style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          )
                       ),
                   ),
                   Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(48, 20, 48, 20),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: InkWell(
-                                child: Text(
-                                  "Qui sommes-nous ?",
-                                  style: links,
-                                ), //Qui sommes-nous?
-                                onTap: () => launchUrl(Uri.parse("https://www.adheos.org/presentation")),
-                              ),
-                            ),
-                            /*Padding(
-                          padding: const EdgeInsets.all(6),
-                          child: InkWell(
-                            onTap: () => launchUrl(Uri.parse("https://www.adheos.org/contact")),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(54, 30, 54, 0),
                             child: Text(
-                              "Contact",
-                              style: links,
+                              "BIENVENUE sur l'app ADHEOS Rainbow!",
+                              style: homeTextStyle,
+                              textAlign: TextAlign.left,
                             ),
                           ),
-                        ),*/
-                            Padding(
-                              padding: const EdgeInsets.all(6),
-                              child: InkWell(
-                                onTap: () => launchUrl(Uri.parse("https://www.adheos.org/mentions-legales")),
-                                child: Text(
-                                  "Mentions légales",
-                                  style: links,
-                                ),
-                              ),
+                          const SizedBox(height: 10, width: 0),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(54, 0, 54, 20),
+                            child: Text(
+                              "Adhéos est une association LGBTI militante et conviviale accueille "
+                                  "informe et défend les droits des personnes LGBTI en France et dans le monde.",
+                              style: homeTextStyle2,
+                              textAlign: TextAlign.justify,
                             ),
-                          ],
-                        ),
-                      ),
-                  ),
+                          ),
+                        ],
+                      )
+                  )
+
                 ],
               );
             },
